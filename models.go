@@ -112,7 +112,7 @@ func (ts *TaskStore) GetTasksByTag(tag string) []Task {
 
 func (ts *TaskStore) GetTasksByDueDate(year, day int, month time.Month) []Task {
 	ts.Lock()
-	ts.Unlock()
+	defer ts.Unlock()
 
 	var tasks []Task
 	for _, task := range ts.tasks {

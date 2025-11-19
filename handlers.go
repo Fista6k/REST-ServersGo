@@ -16,8 +16,8 @@ func (s *taskServer) createTaskHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("handling task create at %s\n", r.URL.Path)
 
 	type RequestTask struct {
-		Text string    `json"text"`
-		Due  time.Time `json"due"`
+		Text string    `json:"text"`
+		Due  time.Time `json:"due"`
 		Tags []string  `json:"tags"`
 	}
 
