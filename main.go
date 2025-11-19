@@ -26,7 +26,12 @@ func main() {
 	router.HandleFunc("/tag/{tag}", server.tagHandler).Methods(http.MethodGet)
 	router.HandleFunc("/due/{year:[0-9]+}/{month:[0-9]+}/{day:[0-9]+}/", server.dueHandler).Methods(http.MethodGet)
 
-	log.Fatal(http.ListenAndServe("localhost:"+os.Getenv("SERVERPORT"), router))
+	port := os.Getenv("SERVERPORT")
+	if port == "" {
+		port = "8080"
+	}
+	log.Printf("start listening on %s", port)
+	log.Fatal(http.ListenAndServe("localhost:"+port, router))
 }
 
 func NewTaskServer() *taskServer {
