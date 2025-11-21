@@ -15,7 +15,9 @@ type taskServer struct {
 var taskStore TaskStore
 
 func main() {
-	router := gin.Default()
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
 	server := NewTaskServer()
 	router.POST("/task/", server.createTaskHandler)
 	router.GET("/task/", server.getTasksHandler)
